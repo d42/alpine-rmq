@@ -10,7 +10,7 @@ RUN         chmod a+x /usr/bin/wrapper && apk add --update tar gzip bash && \
             apk add erlang erlang erlang-mnesia erlang-public-key erlang-crypto erlang-ssl \
                 erlang-sasl erlang-asn1 erlang-inets erlang-os-mon erlang-xmerl erlang-eldap \
                 --update-cache --allow-untrusted \
-                --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
+                --repository http://dl-3.alpinelinux.org/alpine/edge/main/ && \
             cd /srv && \
             tar -xzvf rabbitmq-server-generic-unix-3.5.3.tar.gz && \
             rm -f rabbitmq-server-generic-unix-3.5.3.tar.gz && \
