@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # When this exits, exit all back ground process also.
-trap 'kill $(jobs -p)' EXIT
+trap 'kill $(jobs -p) >/dev/null 2>&1' EXIT
 
 # Die on error
 set -e
@@ -28,6 +28,10 @@ fi
 
 if ! [[ -z ${AUTOCLUSTER_TYPE+x} ]]; then
     rabbitmq-plugins enable --offline autocluster
+    if [[ "$AUTOCLUSTER_TYPE" == "consul" ]]; then
+        # grab the IP address from rancher-metadata
+        CONSUL_SERVICE_ADDRESS=$(curl --silent --fail http://rancher-metadata/2015-12-19/self/container/primary_ip)
+    fi
 fi
 
 if [[ "${use_ssl}" == "yes" ]]; then
